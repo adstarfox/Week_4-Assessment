@@ -42,7 +42,7 @@ module.exports = {
         // console.log(pokeArray)
         let index = pokeArray.findIndex(i => i.name === name)
         let damage = Math.floor(Math.random() * 50)
-        let pokeHP = pokeArray[index].hp -= damage
+        pokeArray[index].hp -= damage
 
         res.status(200).send(pokeArray[index])
     }

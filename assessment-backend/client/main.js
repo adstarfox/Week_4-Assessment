@@ -141,8 +141,7 @@ const putPoke = evt => {
     pokeCard.innerHTML = 
     `<p class="poke-name">${evt.target.value}</p>
     <div class="btns-container">
-    <button class="poke-attack-btns" onclick="console.log('attacked')">Attack</button>
-    <p class="poke-health">HP: 5</p>
+    <button class="poke-attack-btns" onclick="damagePoke('${evt.target.value}')">Attack</button>
     </div>
     `
     pokeContainer1.appendChild(pokeCard)
