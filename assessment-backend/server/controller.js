@@ -23,11 +23,10 @@ module.exports = {
     savePokemon: (req, res) => {
         // console.log(req.body)
         for (let i = 0; i < req.body.length;i++){
-            req.body[i].attack = Math.floor(Math.random() * 100)
             req.body[i].hp = 100
+            pokeArray.push(req.body[i])
         }
-        // console.log(req.body)
-        pokeArray.push(req.body)
+        // console.log(pokeArray)
         res.status(200).send(pokeArray)
     },
     getPokemon: (req, res) => {
@@ -40,11 +39,12 @@ module.exports = {
     updatePoke: (req,res) => {
         // console.log(req.params.name)
         let {name} = req.params
-        console.log(pokeArray)
-        let index = pokeArray.findIndex(i => i[0].name === name)
-        console.log(index)
+        // console.log(pokeArray)
+        let index = pokeArray.findIndex(i => i.name === name)
+        let damage = Math.floor(Math.random() * 50)
+        let pokeHP = pokeArray[index].hp -= damage
 
-        res.status(200).send(`50`)
+        res.status(200).send(pokeArray[index])
     }
 
 }

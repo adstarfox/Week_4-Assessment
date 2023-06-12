@@ -50,7 +50,7 @@ const getGen = evt => {
                 axios.post(`${baseURL}` + `/gen-selected`,res.data.pokemon_species)
                     .then(response => {
                         // console.log(response)
-                        let pokeData = response.data[0]
+                        let pokeData = response.data
                         getPokeData(pokeData) 
                     })
                     .catch(err => console.log(err))
@@ -65,7 +65,7 @@ const getGen = evt => {
                 axios.post(`${baseURL}` + `/gen-selected`,res.data.pokemon_species)
                     .then(response => {
                         // console.log(response)
-                        let pokeData = response.data[0]
+                        let pokeData = response.data
                         // console.log(pokeData)
                         getPokeData(pokeData)
                     })
@@ -81,7 +81,7 @@ const getGen = evt => {
                 axios.post(`${baseURL}` + `/gen-selected`,res.data.pokemon_species)
                     .then(response => {
                         // console.log(response)
-                        let pokeData = response.data[0]
+                        let pokeData = response.data
                         // console.log(pokeData)
                         getPokeData(pokeData)
                     })
@@ -110,7 +110,7 @@ const deletePoke = evt => {
             console.log(res.data)
             const pokeHealth2 = document.createElement(`div`)
             pokeHealth2.classList.add(`poke-health`)
-            pokeHealth2.innerHTML = `<p class="poke-health">${res.data}</p>`
+            pokeHealth2.innerHTML = `<p class="poke-health">${res.data.hp}</p>`
             pokeContainer2.appendChild(pokeHealth2)
         })
         .catch(err => console.log(err))
