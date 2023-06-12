@@ -12,7 +12,8 @@ const {
     getFortune,
     savePokemon,
     getPokemon,
-    deletePoke
+    deletePoke,
+    updatePoke
         } = require('./controller')
 
 app.get("/api/compliment", getCompliment);
@@ -21,6 +22,8 @@ app.get(`/api/get-pokemon`, getPokemon)
 
 app.post(`/api/gen-selected`, savePokemon)
 app.delete(`/api/:id`, deletePoke)
+
+app.put(`/api/:name`, updatePoke)
 
 
 app.listen(4000, () => console.log("Server running on 4000"));

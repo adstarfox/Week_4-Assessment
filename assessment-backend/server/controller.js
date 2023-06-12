@@ -36,6 +36,15 @@ module.exports = {
     deletePoke: (req,res) => {
         pokeArray = []
         res.status(200).send(pokeArray)
+    },
+    updatePoke: (req,res) => {
+        // console.log(req.params.name)
+        let {name} = req.params
+        console.log(pokeArray)
+        let index = pokeArray.findIndex(i => i[0].name === name)
+        console.log(index)
+
+        res.status(200).send(`50`)
     }
 
 }

@@ -46,3 +46,24 @@ footer{
 footer>button{
     height: 50%;
 }
+.poke-containers{
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.poke-picture{
+    height: 300px;
+}
+
+.poke-name{
+    font-size: 50px;
+}
+
+.poke-attack-btns{
+    height: 50px;
+    width: 100px;
+    font-size: 25px;
+    font-weight: 100;
+}

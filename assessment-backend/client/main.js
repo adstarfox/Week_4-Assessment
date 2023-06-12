@@ -88,9 +88,9 @@ const getGen = evt => {
                     .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
+        }
     }
-}
-
+    
 const deletePoke = evt => {
     pokeContainer1.innerHTML = ``
     pokeContainer2.innerHTML = ``
@@ -99,35 +99,50 @@ const deletePoke = evt => {
             alert(`Pokemon have been deleted. Please select a new Generation`)
         })
         .catch(err => console.log(err))
-
+        
     poke1Selector.innerHTML = ``
     poke2Selector.innerHTML = ``
-}
+    }
+    
+ const damagePoke = (name, event) => {
+    axios.put(`${baseURL}/${name}`, event)
+        .then(res => {
+            console.log(res.data)
+            const pokeHealth2 = document.createElement(`div`)
+            pokeHealth2.classList.add(`poke-health`)
+            pokeHealth2.innerHTML = `<p class="poke-health">${res.data}</p>`
+            pokeContainer2.appendChild(pokeHealth2)
+        })
+        .catch(err => console.log(err))
+    }
+    
+    
+    
+    const pokeCard = document.createElement(`div`)
+    const pokePicture = document.createElement(`div`)
+pokePicture.classList.add(`poke-picure`)
+pokeCard.classList.add(`poke-card`)
 
 const putPoke = evt => {
     evt.preventDefault()
     pokeContainer1.innerHTML = ``
-    let pokePicture = ``
+    // let pokePicture.innerHTML = ``
     console.log(evt.target.value)
     axios.get(`https://pokeapi.co/api/v2/pokemon/${evt.target.value}/`)
-        .then(res => {
-            // console.log(res.data.sprites)
-            let {front_default: front} = res.data.sprites
-            // console.log(front)
-        })
-        .catch(err => console.log(err))
-
-
-
+    .then(res => {
+        // console.log(res.data.sprites)
+        let {front_default: front} = res.data.sprites
+        pokePicture.innerHTML = `<img alt='who's that pokemon?' src="${front}" class="poke-picture"/>`
+        pokeContainer1.appendChild(pokePicture)
+    })
+    .catch(err => console.log(err))
     
-    const pokeCard = document.createElement(`div`)
-    pokeCard.classList.add(`poke-card`)
     
-    pokeCard.innerHTML = `<img alt='movie cover' src="${pokePicture}" class="movie-cover"/>
-    <p class="movie-title">Who's that Pokemon</p>
+    pokeCard.innerHTML = 
+    `<p class="poke-name">${evt.target.value}</p>
     <div class="btns-container">
-    <button onclick="console.log('attacked'), 'attack')">attack</button>
-    <p class="movie-rating">HP: 5</p>
+    <button class="poke-attack-btns" onclick="console.log('attacked')">Attack</button>
+    <p class="poke-health">HP: 5</p>
     </div>
     `
     pokeContainer1.appendChild(pokeCard)
@@ -137,13 +152,23 @@ const putPoke2 = evt => {
     pokeContainer2.innerHTML = ``
     console.log(evt.target.value)
     const pokeCard = document.createElement(`div`)
+    const pokePicture2 = document.createElement(`div`)
+    pokePicture2.classList.add(`poke-picure`)
     pokeCard.classList.add(`poke-card`)
-
-    pokeCard.innerHTML = `<img alt='movie cover' src="https://api.triviacreator.com/v1/imgs/quiz/whos_that_pokemon-a5373887-8dd0-449f-8475-d7bc129d767d.webp" class="movie-cover"/>
-    <p class="movie-title">Who's that Pokemon</p>
+    
+    axios.get(`https://pokeapi.co/api/v2/pokemon/${evt.target.value}/`)
+    .then(res => {
+        // console.log(res.data.sprites)
+        let {front_default: front} = res.data.sprites
+        pokePicture2.innerHTML = `<img alt='who's that pokemon?' src="${front}" class="poke-picture"/>`
+        pokeContainer2.appendChild(pokePicture2)
+    })
+    .catch(err => console.log(err))
+    
+    pokeCard.innerHTML = 
+    `<p class="poke-name">${evt.target.value}</p>
     <div class="btns-container">
-        <button onclick="console.log('attacked'), 'attack')">attack</button>
-        <p class="movie-rating">HP: 5</p>
+    <button class="poke-attack-btns" onclick="damagePoke('${evt.target.value}')">Attack</button>
     </div>
     `
     pokeContainer2.appendChild(pokeCard)
